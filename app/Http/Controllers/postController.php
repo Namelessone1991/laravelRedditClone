@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Post; 
 use Illuminate\Http\Request;
+
+
 
 class postController extends Controller
 {
@@ -10,14 +12,25 @@ class postController extends Controller
    public function index()
    {
 
-     return view('posts.index');
+     $posts =   Post::all();
+
+     return view('posts.index')->with('posts',$posts);
       
    }
 
-   public function show($id)
+   public function show($postid)
    {
+      
+    $post = Post::find($postid);
 
-     return view('posts.show');
+
+    if (is_null($post))
+    {
+      abort(404); 
+
+    }
+
+     return view('posts.show')->with('post',$post);
 
    }
 

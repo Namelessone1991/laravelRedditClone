@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-   <div class = "row">
+
+@foreach($posts as $post)
+      <div class = "row">
 
     <div class = "col-md-12">
+     <h2><a href =" {{ route('post_path',['post'=>$post->id])}} ">{{$post->title}} </a> </h2>
 
-       <h2> Title </h2>
+     <span> {{$post->description}} </span>
+     <p> posted {{$post->created_at->diffForHumans()}}</p>
+     </div>
 
-       <span> LOREM IPSUM... </span>
-
-        <p> posted 5 hours ago </p>
    </div>
-
-    
- 
-</div>
+   
+    @endforeach
 
 @endsection
 

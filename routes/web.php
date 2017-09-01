@@ -21,6 +21,6 @@ Route::get('/', function () {
 
 Route::get('/test/{variable}','dataController@variableOutput');
 
-Route::get('/posts','postController@index');
+Route::name('posts_path')->get('/posts','postController@index');
 
-Route::get('/posts/{id}','postController@show');
+Route::name('post_path')->get('/posts/{post}','postController@show');

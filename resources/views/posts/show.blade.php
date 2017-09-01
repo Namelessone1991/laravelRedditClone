@@ -4,16 +4,21 @@
 
 
    <div class = "row">
+      <div class = "col-md-12">
+         
+         <h2> {{$post->title}} </h2>
 
-    <div class = "col-md-12">
+         <span> {{$post->description}} </span>
+     <p> posted {{$post->created_at->diffForHumans()}}</p>
 
-       <h2> Title </h2>
+      </div>
+   </div> 
 
-      <span> LOREM IPSUM DOLOREM SIT AMET </span>
-        <p> posted 5 hours ago </p>
-   </div>
 
-   </div>
+  
+     
+      
+   
 
     
  

@@ -11,7 +11,10 @@
          <span> {{$post->description}} </span>
      <p> posted {{$post->created_at->diffForHumans()}}</p>
 
-      </div>
+       <div class="pull-right">
+       <a href= "{{ route('posts_path') }}" class = "btn btn-info">Return to main index</a>
+       </div> 
+      </div>        
    </div> 
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Post; 
 use Illuminate\Http\Request;
 use App\Http\Requests\createPostRequest;
-
+use App\Http\Requests\updatePostRequest;
 
 
 class postController extends Controller
@@ -13,7 +13,7 @@ class postController extends Controller
    public function index()
    {
 
-     $posts =   Post::orderBy('id','desc')->get();
+     $posts =   Post::orderBy('id','desc')->paginate(10);
 
      return view('posts.index')->with('posts',$posts);
       
@@ -45,7 +45,10 @@ class postController extends Controller
    public function create()
    {
 
-      return view('posts.create'); 
+      $post = new Post; 
+
+
+      return view('posts.create')->with('post',$post); 
    }
 
    public function store(createPostRequest $request)
@@ -53,11 +56,49 @@ class postController extends Controller
 
        $post = Post::create($request->only('title','description','url'));
 
+
+       //flash session once read, it's eliminated
+       //flash parameters are the name of the session, and the value of the message
+       session()->flash('message','Post created'); 
+
        return redirect()->route('posts_path');
     
      //dd($request->all());
 
 
    }
+
+
+  public function edit(Post $post)
+  {
+
+     return view('posts.edit')->with('post',$post);
+
+  }
+
+
+  public function update(Post $post,updatePostRequest $request)
+  {
+
+
+    $post->update($request->only('title','description','url'));
+
+    session()->flash('message','Post updated');
+    return redirect()->route('post_path',['post'=>$post->id]);
+
+  }
+
+
+  public function delete(Post $post)
+  {
+
+    $post->delete();
+
+    session()->flash('message','Post deleted successfully');
+
+   return redirect()->route('posts_path');
+
+  }
+
 
 }

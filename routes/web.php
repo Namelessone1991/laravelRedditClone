@@ -24,10 +24,15 @@ Route::get('/test/{variable}','dataController@variableOutput');
 Route::name('posts_path')->get('/posts','postController@index');
 
 Route::name('create_post_path')->get('/posts/create','postController@create');
-Route::name('store_post_path')->post('/posts','postController@store');
 //this one must be created first so it does not get overrriden by the route
 //that is gonna be created below
+Route::name('store_post_path')->post('/posts','postController@store');
 
 
 Route::name('post_path')->get('/posts/{post}','postController@show');
 
+Route::name('edit_post_path')->get('/posts/{post}/edit','postController@edit');
+
+Route::name('update_post_path')->put('/posts/{post}','postController@update');
+
+Route::name('delete_post_path')->delete('/posts/{post}','postController@delete');

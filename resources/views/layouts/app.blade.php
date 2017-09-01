@@ -14,11 +14,23 @@ Reddit Clone
    
 
    <div class = "col-md-12">
-      <h1> Reddit clone </h1> 
+      <h1> Reddit clone 
+      
+      <div class ="pull-right">
+      
+      <a href = "{{route('create_post_path')}}">Create Post</a>
+      
+      </div>
+      
+      
+      </h1> 
 
    </div>
 
    </div>
+
+   @include ('layouts._errors')
+   @include('posts._messages')
 
 @yield('content')
 

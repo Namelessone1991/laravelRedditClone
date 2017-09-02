@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Post; 
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -26,4 +28,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+   //this function tells laravel that a user has many posts associated with it
+   //this is reflected in the database
+   public function posts()
+   {
+
+      return $this->hasMany(Post::class);
+   }
+
 }

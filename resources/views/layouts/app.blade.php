@@ -36,7 +36,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        
+                        <li><a href="{{route('create_post_path')}}">Create post</a></li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -70,10 +72,14 @@
                 </div>
             </div>
         </nav>
-        @include ('layouts._errors')
-   @include('posts._messages')
+       
 
-   <div class = "container">@yield('content')</div>
+   <div class = "container">
+    @include ('layouts._errors')
+   @include('posts._messages')
+   
+   
+   @yield('content')</div>
    
         
     </div>

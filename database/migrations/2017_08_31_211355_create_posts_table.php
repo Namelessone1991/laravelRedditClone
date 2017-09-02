@@ -15,6 +15,8 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned(); //no foreign key created
+            //if a user is removed, posts remain the same, unchanged
             $table->string('title');
             $table->text('description');
             $table->string('url');

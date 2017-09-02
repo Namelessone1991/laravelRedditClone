@@ -54,7 +54,26 @@ class postController extends Controller
    public function store(createPostRequest $request)
    {
 
-       $post = Post::create($request->only('title','description','url'));
+
+      /*
+        Code added to comply with the changes in the database
+        thes changes are under the Post.php and User.php models
+        These models have the hasMany and belongsTo functions
+        these are meant to 
+      */
+        
+      $post = new Post; 
+
+      $post->fill($request->only('title','description','url'));
+
+
+      //following code assignates the user_id to the post
+
+      $post->user_id = $request->user()->id;
+
+      $post->save(); 
+
+
 
 
        //flash session once read, it's eliminated
@@ -71,6 +90,13 @@ class postController extends Controller
 
   public function edit(Post $post)
   {
+
+    if($post->user_id != \Auth::user()->id)
+    {
+
+        return redirect()->route('posts_path');
+
+    }
 
      return view('posts.edit')->with('post',$post);
 
@@ -91,6 +117,18 @@ class postController extends Controller
 
   public function delete(Post $post)
   {
+
+
+     //verifies if a user is the owner of the publication
+     //he is trying to delete
+    if($post->user_id != \Auth::user()->id)
+    {
+
+        return redirect()->route('posts_path');
+
+    }
+
+
 
     $post->delete();
 

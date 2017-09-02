@@ -9,8 +9,15 @@
       <div class = "row">
 
     <div class = "col-md-12">
-     <h2><a href =" {{ route('post_path',['post'=>$post->id])}} ">{{$post->title}} </a> </h2>
-      <div class="pull-right">
+     <h2><a href =" {{ route('post_path',['post'=>$post->id])}} ">{{$post->title}} </a> 
+      
+      
+      
+      
+
+      @if($post->user_id == \Auth::user()->id)
+
+      <small class = "pull-right">
       <a href= "{{ route('edit_post_path',['post'=>$post->id]) }}" class = "btn btn-info">Edit</a>
 
       {{-- NOTICE THE FORM BELOW IS NEEDED DUE TO THE WAY LARAVEL WORKS, A SINGLE BUTTON WOULD NOT WORK --}}
@@ -27,7 +34,11 @@
       
       
       </form>
-      </div>
+      </small>
+      @endif
+      </h2>
+      
+      
        
      <span> {{$post->description}} </span>
 
